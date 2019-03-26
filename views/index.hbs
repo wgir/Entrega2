@@ -1,5 +1,12 @@
 {{>header}}
         
-        <p>Este es el contenido de la segunda entrega </p>
-
+        <p>Listado de Cursos</p>
+        {{{listarCursos}}}
+        <form action="/registrarCurso" method="post">
+            <input type="number" name="id" placeholder="Id">
+            <input type="text" name="nombre" placeholder="Nombre">
+            <input type="text" name="descripcion" placeholder="Descripcion">
+            <input type="number" name="valor" placeholder="Valor">
+            <button>Registrar Curso</button>
+        </form>
 {{>footer}}
