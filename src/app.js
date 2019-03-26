@@ -16,8 +16,8 @@ app.use(bodyParser.urlencoded({extended:false}));
 app.use(express.static(directorioPublico));
 app.set('view engine','hbs');
 
-app.get('/',(req,res)=>{
-    res.render('index',{nombre:'William', param1:1, param2:1});
+app.get('/coordinador',(req,res)=>{
+    res.render('coordinador');
 })
 
 app.post('/registrarCurso',(req,res)=>{

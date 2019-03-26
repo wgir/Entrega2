@@ -6,15 +6,18 @@ listaCursos=[];
 hbs.registerHelper('registrarCurso',(_id,_nombre,_descripcion,_valor)=>{
     listaCursos= require(archivoJSON);
     //listaCursos= JSON.parse(fs.readFileSync('../listadoCursos.json'));
-    if(!listaCursos.find(l=>l.id==parseInt(_id)))
+    if(_id!='' && _nombre!='' && _descripcion!='' && _valor!='')
     {
-        let curso={id:_id,nombre:_nombre,descripcion:_descripcion,valor:_valor,estado:'Disponible'}
-        listaCursos.push(curso);
-        guardarCursosEnJSON();
-        return 'Curso registrado exitosamente!!';
+        if(!listaCursos.find(l=>l.id==parseInt(_id)))
+        {
+            let curso={id:_id,nombre:_nombre,descripcion:_descripcion,valor:_valor,estado:'Disponible'}
+            listaCursos.push(curso);
+            guardarCursosEnJSON();
+            return 'Curso registrado exitosamente!!';
+        }else
+            return 'El id del curso ya se encuentra registrado :(';
     }else
-        return 'El id del curso ya se encuentra registrado :(';
-    
+        return 'El id, nombre, descripcion y valor son obligatorios';
 });
 
 hbs.registerHelper('listarCursos',()=>{
