@@ -16,6 +16,12 @@ app.use(bodyParser.urlencoded({extended:false}));
 app.use(express.static(directorioPublico));
 app.set('view engine','hbs');
 
+
+app.get('/',(req,res)=>{
+    res.render('index');
+})
+
+
 app.get('/coordinador',(req,res)=>{
     res.render('coordinador');
 })
@@ -25,6 +31,31 @@ app.post('/registrarCurso',(req,res)=>{
 })
 
 
+app.get('/verCurso',(req,res)=>{
+    res.render('verCurso',{id:req.query.id});
+})
+
+app.get('/interesado',(req,res)=>{
+    res.render('interesado');
+})
+
+app.get('/inscripcion',(req,res)=>{
+    res.render('inscripcion',{id:req.query.id});
+})
+
+app.post('/registrarInscripcion',(req,res)=>{
+    res.render('registrarInscripcion',{idCurso:req.body.idCurso,documento:req.body.documento,nombre:req.body.nombre,correo:req.body.correo,telefono:req.body.telefono});
+})
+
+
+app.get('/cerrarCurso',(req,res)=>{
+    res.render('cerrarCurso',{id:req.query.id});
+})
+
+
+app.get('/verInscritos',(req,res)=>{
+    res.render('verInscritos',{id:req.query.id});
+})
 
 console.log(__dirname);
 

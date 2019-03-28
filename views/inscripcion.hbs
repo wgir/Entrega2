@@ -1,0 +1,13 @@
+{{>header}}
+        
+        <p>Inscripcion</p>
+        {{{verCurso id}}}
+        <form action="/registrarInscripcion" method="post">
+            <input type="hidden" name="idCurso" value={{id}}>
+            <input type="number" name="documento" placeholder="Documento">
+            <input type="text" name="nombre" placeholder="Nombre">
+            <input type="text" name="correo" placeholder="Correo">
+            <input type="text" name="telefono" placeholder="Telefono">
+            <button>Inscribirse</button>
+        </form>
+{{>footer}}
