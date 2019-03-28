@@ -54,7 +54,12 @@ app.get('/cerrarCurso',(req,res)=>{
 
 
 app.get('/verInscritos',(req,res)=>{
-    res.render('verInscritos',{id:req.query.id});
+    res.render('verInscritos',{idCurso:req.query.idCurso});
+})
+
+
+app.get('/eliminarInscrito',(req,res)=>{
+    res.render('eliminarInscrito',{idCurso:req.query.idCurso,documento:req.query.documento});
 })
 
 console.log(__dirname);

@@ -79,7 +79,7 @@ hbs.registerHelper('listarCursos',()=>{
                         texto=texto+ "<td><a href='/cerrarCurso?id="+element.id+"'>Cerrar</a></td>";
                      else
                         texto=texto+ "<td></td>";
-                    texto=texto+ "<td><a href='/verInscritos?id="+element.id+"'>Ver</a></td></tr>";
+                    texto=texto+ "<td><a href='/verInscritos?idCurso="+element.id+"'>Ver Inscritos</a></td></tr>";
 
     });
                 texto=texto+"</tbody>              </table>"
@@ -133,7 +133,7 @@ hbs.registerHelper('registrarInscripcion',(_idCurso,_documento,_nombre,_correo,_
             let inscripcion={idCurso:parseInt(_idCurso),documento:parseInt(_documento),nombre:_nombre,correo:_correo,telefono:_telefono}
             listaInscripciones.push(inscripcion);
             guardarInscripcionesEnJSON();
-            return 'Curso registrado exitosamente!!';
+            return 'Inscripcion registrada exitosamente!!';
         }else
             return 'La persona ya se encuntra registrada en el curso solicitado :(';
     }else
@@ -174,14 +174,14 @@ hbs.registerHelper('verInscritos',(_idCurso)=>{
                 <tbody>";
 
                 listaInscripciones.forEach(element => {
-                    if(element.idCurso===parseInt(_idCurso) && element.estado==='Disponible')
+                    if(element.idCurso===parseInt(_idCurso))
                     {
                         texto=texto+
                         "<tr><td>"+element.documento+"</td>"+
                         "<td>"+element.nombre+"</td>"+
                         "<td>"+element.correo+"</td>"+
-                        "<td>"+element.Telefono+"</td>"+
-                        "<td><a href='/eliminarEstudiante?idCurso="+_idCurso+"&documento="+element.documento+"'>Eliminar</a></td>";
+                        "<td>"+element.telefono+"</td>"+
+                        "<td><a href='/eliminarInscrito?idCurso="+_idCurso+"&documento="+element.documento+"'>Eliminar</a></td>";
                         
                     }
 
@@ -189,6 +189,17 @@ hbs.registerHelper('verInscritos',(_idCurso)=>{
                 texto=texto+"</tbody>              </table>"
     
     return texto;
+});
+
+
+hbs.registerHelper('eliminarInscrito',(_idCurso,_documento)=>{
+    listaInscripciones=require(archivoInscripcionJSON);
+    nuevo=listaInscripciones.filter(l=>l.idCurso!==parseInt(_idCurso) && l.documento!==parseInt(_documento));
+    listaInscripciones=nuevo;
+    guardarInscripcionesEnJSON();
+    //console.log("eliminando "+_idCurso+ " "+_documento);
+    //console.log(filtro);
+    return "Se elimino exitosamente!!";
 });
 
 const guardarCursosEnJSON=()=>{
